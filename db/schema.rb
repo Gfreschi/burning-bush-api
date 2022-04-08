@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_07_231920) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_08_201258) do
+  create_table "complaints", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "severity"
+    t.string "details"
+    t.integer "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_complaints_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email", null: false
@@ -19,4 +29,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_07_231920) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "complaints", "users"
 end
