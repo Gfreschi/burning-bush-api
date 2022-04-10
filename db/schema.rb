@@ -15,7 +15,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_08_201258) do
     t.integer "user_id", null: false
     t.integer "severity"
     t.string "details"
-    t.integer "type"
+    t.integer "kind"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_complaints_on_user_id"

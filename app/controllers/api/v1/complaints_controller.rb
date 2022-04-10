@@ -53,7 +53,7 @@ class Api::V1::ComplaintsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def complaint_params
-      params.require(:complaint).permit(:user_id, :severity, :details, :type)
+      params.require(:complaint).permit(:user_id, :severity, :details)
     end
   end
 end
