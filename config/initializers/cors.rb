@@ -9,3 +9,5 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
             methods: [:get, :post, :patch, :put]
   end
 end
+
+#headers: %i[Authorization Content-Type]

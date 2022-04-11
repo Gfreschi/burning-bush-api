@@ -6,6 +6,10 @@ namespace :api do
       post '/', to: 'registrations#create', as: :user_registration
     end
     resources :complaints
+
+    namespace :mobile do
+      resources :complaints
+    end
   end
 end
 
