@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
-  devise_for :users
+
   root 'pages#home'
-  namespace :api do
-    namespace :v1 do
-      resources :users
-      resources :complaints
-    end
-  end
+
+  use_doorkeeper
+  devise_for :users
+
+  draw :api
+
     # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
     # Defines the root path route ("/")

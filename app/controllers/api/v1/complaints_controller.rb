@@ -1,4 +1,5 @@
-class Api::V1::ComplaintsController < ApplicationController
+class Api::V1::ComplaintsController < ApiController
+  before_action :set_complaint, only: %i[show edit update destroy]
 
   def index
     @complaints = Complaint.all

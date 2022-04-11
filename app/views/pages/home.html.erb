@@ -11,9 +11,10 @@
   <p>You can test the API with following credentials.</p>
 
 <div class="container mt-5">
+    <%= @application.as_json %>
   <ul>
     <li><%= link_to "User" %> </li>
-    <li>Complaints V1</li>
+    <li><%= link_to "Complaints V1", api_v1_complaints_path %> </li>
     <li>User V1</li>
   </ul>
 </div>
