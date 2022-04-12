@@ -1,5 +1,6 @@
-Rails.application.routes.draw do
+# frozen_string_literal: true
 
+Rails.application.routes.draw do
   root 'pages#home'
 
   use_doorkeeper
@@ -7,8 +8,8 @@ Rails.application.routes.draw do
 
   draw :api
 
-    # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-    # Defines the root path route ("/")
-    # root "articles#index"
+  # Defines the root path route ("/")
+  # root "articles#index"
 end

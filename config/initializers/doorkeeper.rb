@@ -13,11 +13,11 @@ Doorkeeper.configure do
   #   #   User.find_by(id: session[:user_id]) || redirect_to(new_user_session_url)
   # end
 
-  resource_owner_from_credentials do 
+  resource_owner_from_credentials do
     User.authenticate(params[:email], params[:password])
   end
 
-  #enable password grant
+  # enable password grant
   grant_flows %w[password]
 
   # If you didn't skip applications controller from Doorkeeper routes in your application routes.rb
