@@ -78,7 +78,11 @@ GEM
     bindex (0.8.1)
     bootsnap (1.11.1)
       msgpack (~> 1.2)
+    breakman (1.0.0)
     builder (3.2.4)
+    bundler-audit (0.9.0.1)
+      bundler (>= 1.2.0, < 3)
+      thor (~> 1.0)
     capybara (3.36.0)
       addressable
       matrix
@@ -152,6 +156,7 @@ GEM
     parallel (1.22.1)
     parser (3.1.1.0)
       ast (~> 2.4.1)
+    pg (1.3.5)
     public_suffix (4.0.6)
     puma (5.6.4)
       nio4r (~> 2.0)
@@ -212,6 +217,8 @@ GEM
       rack (>= 1.1)
       rubocop (>= 1.7.0, < 2.0)
     ruby-progressbar (1.11.0)
+    ruby_audit (2.1.0)
+      bundler-audit (~> 0.9.0)
     rubyzip (2.3.2)
     selenium-webdriver (4.1.0)
       childprocess (>= 0.5, < 5.0)
@@ -260,17 +267,21 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers (~> 0.10.0)
   bootsnap
+  breakman
+  bundler-audit
   capybara
   debug
   devise (~> 4.8)
   doorkeeper (~> 5.5)
   importmap-rails
   jbuilder
+  pg
   puma (~> 5.0)
   rack-cors
   rails (~> 7.0.2, >= 7.0.2.3)
   rubocop
   rubocop-rails
+  ruby_audit
   selenium-webdriver
   sprockets-rails
   sqlite3 (~> 1.4)
