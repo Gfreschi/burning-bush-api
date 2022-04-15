@@ -61,7 +61,7 @@ group :development, :test do
   gem 'debug', platforms: %i[mri mingw x64_mingw]
 
   # Security related gems
-  gem 'breakman'
+  gem 'brakeman'
   gem 'bundler-audit'
   gem 'ruby_audit'
 
