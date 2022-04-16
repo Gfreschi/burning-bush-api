@@ -11,6 +11,8 @@ class User < ApplicationRecord
   enum role: { user: 0, admin: 1 }
 
   has_many :complaints
+  has_one_attached :avatar
+
 
   def self.authenticate(email, password)
     user = User.find_for_authentication(email:)
