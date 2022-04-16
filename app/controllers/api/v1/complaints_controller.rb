@@ -25,6 +25,7 @@ module Api
 
         respond_to do |format|
           if @complaint.save
+            IncidentGenerator.call(complaint: @complaint)
             format.json { render json: @complaint, status: :created }
           else
             format.json { render json: @complaint.errors, status: :unprocessable_entity }
