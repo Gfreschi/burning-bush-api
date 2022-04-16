@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_11_123103) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_16_201810) do
   create_table "complaints", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "severity"
@@ -18,7 +18,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_11_123103) do
     t.integer "kind"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "incident_id"
+    t.index ["incident_id"], name: "index_complaints_on_incident_id"
     t.index ["user_id"], name: "index_complaints_on_user_id"
+  end
+
+  create_table "incidents", force: :cascade do |t|
+    t.string "title"
+    t.integer "severity"
+    t.integer "kind"
+    t.string "details"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "oauth_access_tokens", force: :cascade do |t|
@@ -63,6 +74,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_11_123103) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "complaints", "incidents"
   add_foreign_key "complaints", "users"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
 end
