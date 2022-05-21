@@ -24,10 +24,10 @@ module DoorkeeperRegisterable
       email: user.email,
       role: user.role,
       access_token: access_token.token,
-      token_type:,
+      token_type: token_type,
       expires_in: access_token.expires_in,
       use_refresh_token: access_token.refresh_token,
-      create_at: access_token.created_at.to_time.to_i
+      create_at: user.created_at.iso8601,
     }
   end
 end

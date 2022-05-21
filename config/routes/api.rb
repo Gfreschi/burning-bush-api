@@ -10,6 +10,12 @@ namespace :api do
     namespace :mobile do
       resources :complaints
     end
+
+    namespace :web do
+      resources :complaints
+    end
+
+    get '/users/me', to: 'users#me'
   end
 end
 

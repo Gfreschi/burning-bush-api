@@ -2,12 +2,12 @@
 
 module Api
   module V1
-    module Mobile
+    module Web
       class ComplaintsController < ApiController
         include ApplicationHelper
 
         before_action :set_complaint, only: %i[show]
-        #before_action :is_admin? just for testing
+        #before_action :is_admin?
 
         skip_before_action :doorkeeper_authorize!
 

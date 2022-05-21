@@ -3,7 +3,10 @@
 module Api
   module V1
     class UsersController < ApplicationController
-      before_action :set_user, only: %i[show edit update destroy]
+      skip_before_action :doorkeeper_authorize!
+      before_action :current_user
+      respond_to    :json
+      #before_action :set_user, only: %i[show edit update destroy]
 
       # GET /users or /users.json
       def index
@@ -60,6 +63,19 @@ module Api
         respond_to do |format|
           format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
           format.json { head :no_content }
+        end
+      end
+
+      def me
+        if @current_user.nil?
+          render json: { error: 'Not Authorized' }, status: :unauthorized
+        else
+          render json: {
+            id: @current_user.id,
+            email: @current_user.email,
+            role: @current_user.role,
+            created_at: @current_user.created_at.iso8601
+          }, status: :ok
         end
       end
 
