@@ -3,7 +3,6 @@
 module Api
   module V1
     class ComplaintsController < ApiController
-
       before_action :set_complaint, only: %i[show edit update destroy]
       after_action  :create_incident, only: [:create]
 
@@ -45,10 +44,10 @@ module Api
       end
 
       def destroy
-        @complaint.destroy
-
-        respond_to do |format|
-          format.json { head :no_content }
+        if @complaint.destroy
+          render json: { message: 'Complaint deleted' }, status: :ok
+        else
+          format.json { render json: @complaint.errors, status: :unprocessable_entity }
         end
       end
 
