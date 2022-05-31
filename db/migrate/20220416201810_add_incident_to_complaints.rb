@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddIncidentToComplaints < ActiveRecord::Migration[7.0]
   def change
     add_reference :complaints, :incident, null: true, foreign_key: true
