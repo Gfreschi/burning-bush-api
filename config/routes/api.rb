@@ -13,6 +13,7 @@ namespace :api do
 
     namespace :web do
       resources :complaints
+      resources :incidents
     end
 
     get '/users/me', to: 'users#me'

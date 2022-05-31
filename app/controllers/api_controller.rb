@@ -7,7 +7,7 @@ class ApiController < ApplicationController
   before_action :current_user
 
   # Skip checking CSRF token authenticity for API requests.
-  # protect_from_forgery with: CustomStrategy -> issue 
+  # protect_from_forgery with: CustomStrategy -> issue
   skip_before_action :verify_authenticity_token, raise: false
 
   # Set response type

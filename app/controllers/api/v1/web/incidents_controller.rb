@@ -3,33 +3,32 @@
 module Api
   module V1
     module Web
-      class ComplaintsController < ApiController
+      class IncidentsController < ApiController
         include ApplicationHelper
 
-        before_action :set_complaint, only: %i[show]
-        # before_action :is_admin?
+        before_action :set_incident, only: %i[show]
 
         skip_before_action :doorkeeper_authorize!
 
         def index
-          @complaints = Complaint.all
-          render json: @complaints
+          @incidents = Incident.all
+          render json: @incidents
         end
 
         def show
-          render json: @complaint
+          render json: @incident
         end
 
         private
 
         # Use callbacks to share common setup or constraints between actions.
-        def set_complaint
-          @complaint = Complaint.find(params[:id])
+        def set_incident
+          @incident = Incident.find(params[:id])
         end
 
         # Only allow a list of trusted parameters through.
-        def complaint_params
-          params.require(:complaint)
+        def incident_params
+          params.require(:incident)
         end
       end
     end

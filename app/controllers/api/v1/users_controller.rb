@@ -6,7 +6,7 @@ module Api
       skip_before_action :doorkeeper_authorize!
       before_action :current_user
       respond_to    :json
-      #before_action :set_user, only: %i[show edit update destroy]
+      # before_action :set_user, only: %i[show edit update destroy]
 
       # GET /users or /users.json
       def index

@@ -4,6 +4,7 @@ module Api
   module V1
     class ComplaintsController < ApiController
       before_action :set_complaint, only: %i[show edit update destroy]
+      after_action  :create_incident, only: [:create]
 
       def index
         @complaints = Complaint.where(user_id: current_user).all.order('created_at DESC')
@@ -25,7 +26,6 @@ module Api
 
         respond_to do |format|
           if @complaint.save
-            IncidentGenerator.call(complaint: @complaint)
             format.json { render json: @complaint, status: :created }
           else
             format.json { render json: @complaint.errors, status: :unprocessable_entity }
@@ -44,15 +44,19 @@ module Api
       end
 
       def destroy
-        @complaint.destroy
-
-        respond_to do |format|
-          format.json { head :no_content }
+        if @complaint.destroy
+          render json: { message: 'Complaint deleted' }, status: :ok
+        else
+          format.json { render json: @complaint.errors, status: :unprocessable_entity }
         end
       end
 
       private
       # Use callbacks to share common setup or constraints between actions.
+      def create_incident
+        IncidentGenerator.call(complaint: @complaint)
+      end
+
       def set_complaint
         @complaint = Complaint.find(params[:id])
       end

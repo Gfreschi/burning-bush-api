@@ -7,7 +7,7 @@ module Api
         include ApplicationHelper
 
         before_action :set_complaint, only: %i[show]
-        #before_action :is_admin? just for testing
+        # before_action :is_admin? just for testing
 
         skip_before_action :doorkeeper_authorize!
 
