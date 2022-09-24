@@ -9,4 +9,11 @@ class Complaint < ApplicationRecord
   validates :user, presence: true
   validates :latitude, presence: true
   validates :longitude, presence: true
+
+  reverse_geocoded_by :latitude, :longitude
+  after_validation :reverse_geocode
+
+  def coordinates
+    [latitude, longitude]
+  end
 end

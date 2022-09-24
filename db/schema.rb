@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_17_194409) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_24_204345) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -62,6 +62,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_17_194409) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "locations", force: :cascade do |t|
+    t.integer "incident_id", null: false
+    t.string "country"
+    t.string "state"
+    t.string "city"
+    t.string "street"
+    t.float "latitude"
+    t.float "longitude"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["incident_id"], name: "index_locations_on_incident_id"
+  end
+
   create_table "oauth_access_tokens", force: :cascade do |t|
     t.integer "resource_owner_id"
     t.integer "application_id", null: false
@@ -108,5 +121,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_17_194409) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "complaints", "incidents"
   add_foreign_key "complaints", "users"
+  add_foreign_key "locations", "incidents"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
 end
