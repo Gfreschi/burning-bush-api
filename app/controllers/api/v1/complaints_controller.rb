@@ -4,7 +4,6 @@ module Api
   module V1
     class ComplaintsController < ApiController
       before_action :set_complaint, only: %i[show edit update destroy]
-      after_action  :create_incident, only: [:create]
 
       def index
         @complaints = Complaint.where(user_id: current_user).all.order('created_at DESC')
@@ -24,12 +23,11 @@ module Api
       def create
         @complaint = current_user.complaints.new(complaint_params)
 
-        respond_to do |format|
-          if @complaint.save
-            format.json { render json: @complaint, status: :created }
-          else
-            format.json { render json: @complaint.errors, status: :unprocessable_entity }
-          end
+        @complaint.user = current_user
+        if @complaint.save
+          render json: @complaint, status: :created
+        else
+          render json: @complaint.errors, status: :unprocessable_entity
         end
       end
 
@@ -53,17 +51,13 @@ module Api
 
       private
       # Use callbacks to share common setup or constraints between actions.
-      def create_incident
-        IncidentGenerator.call(complaint: @complaint)
-      end
-
       def set_complaint
         @complaint = Complaint.find(params[:id])
       end
 
       # Only allow a list of trusted parameters through.
       def complaint_params
-        params.require(:complaint).permit(:user_id, :severity, :details, :latitude, :longitude)
+        params.require(:complaint).permit(:user_id, :severity, :kind, :details, :latitude, :longitude)
       end
     end
   end

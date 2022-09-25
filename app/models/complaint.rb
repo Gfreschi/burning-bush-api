@@ -13,6 +13,12 @@ class Complaint < ApplicationRecord
   reverse_geocoded_by :latitude, :longitude
   after_validation :reverse_geocode
 
+  after_create :generate_incident
+
+  def generate_incident
+    ::IncidentGenerator.call(self)
+  end
+
   def coordinates
     [latitude, longitude]
   end

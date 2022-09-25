@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 
 class Location < ApplicationRecord
-  belongs_to :incident
+  belongs_to :incident, inverse_of: :location, dependent: :destroy
 
   validates :latitude, presence: true
   validates :longitude, presence: true
 
-  with_options if: :address do
-    validates :address, presence: true
+  with_options if: :address? do
     validates :city, presence: true
     validates :state, presence: true
     validates :country, presence: true
@@ -25,5 +24,9 @@ class Location < ApplicationRecord
 
   def address
     [street, city, state, country].compact.join(', ')
+  end
+
+  def address?
+    address.present?
   end
 end
