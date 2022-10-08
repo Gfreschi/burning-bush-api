@@ -11,7 +11,7 @@ module Api
         skip_before_action :doorkeeper_authorize!
 
         def index
-          @incidents = Incident.all
+          @incidents = Incident.limit(100).order('created_at DESC')
           render json: @incidents
         end
 

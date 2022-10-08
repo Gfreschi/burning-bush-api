@@ -8,6 +8,7 @@ class Incident < ApplicationRecord
   validates :location, presence: true
   validates :complaints, presence: true
 
+  delegate :coordinates, to: :location
   delegate :latitude, :longitude, to: :location
   delegate :address, to: :location
 end

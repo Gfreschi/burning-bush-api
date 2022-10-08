@@ -57,7 +57,7 @@ module Api
 
       # Only allow a list of trusted parameters through.
       def complaint_params
-        params.require(:complaint).permit(:user_id, :severity, :kind, :details, :latitude, :longitude)
+        params.require(:complaint).permit(:user_id, :severity, :kind, :details, :latitude, :longitude, :image)
       end
     end
   end

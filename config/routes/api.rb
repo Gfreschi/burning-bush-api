@@ -13,6 +13,7 @@ namespace :api do
 
     namespace :web do
       resources :complaints
+      get 'latest', to: 'complaints#latest'
       resources :incidents
     end
 
