@@ -6,7 +6,7 @@ module Api
       before_action :set_complaint, only: %i[show edit update destroy]
 
       def index
-        @complaints = Complaint.where(user_id: current_user).all.order('created_at DESC')
+        @complaints = Complaint.where(user_id: current_user).limit(5).order('created_at DESC')
         render json: @complaints
       end
 

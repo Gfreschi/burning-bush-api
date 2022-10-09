@@ -102,6 +102,8 @@ gem 'devise', '~> 4.8'
 
 gem 'doorkeeper', '~> 5.5'
 
-gem "geocoder", "~> 1.8"
+gem 'geocoder', '~> 1.8'
 
-gem "sidekiq", "~> 6.5"
+gem 'sidekiq', '~> 6.5'
+
+gem 'decisiontree', '~> 0.5.0'
