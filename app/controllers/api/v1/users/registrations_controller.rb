@@ -4,6 +4,7 @@ module Api
   module V1
     module Users
       class RegistrationsController < ApiController
+        # skip because we don't need to authenticate the user if they are registering
         skip_before_action :doorkeeper_authorize!, only: %i[create]
 
         include DoorkeeperRegisterable

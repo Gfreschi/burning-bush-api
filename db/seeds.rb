@@ -33,27 +33,3 @@ User.create(name: 'Fulano',
             password_confirmation: 'password',
             role: User.roles[:user])
 
-Complaint.create(user_id: 1,
-                 severity: 10,
-                 details: 'Fogo no mato',
-                 kind: Complaint.kinds[:burn])
-
-Complaint.create(user_id: 1,
-                 severity: 3,
-                 details: 'Lixo no chão',
-                 kind: Complaint.kinds[:trash])
-
-Complaint.create(user_id: 1,
-                 severity: 1,
-                 details: 'Muito lixo',
-                 kind: Complaint.kinds[:trash])
-
-Complaint.create(user_id: 2,
-                 severity: 5,
-                 details: 'Entulho no terreno',
-                 kind: Complaint.kinds[:trash])
-
-Complaint.create(user_id: 2,
-                 severity: 5,
-                 details: 'FOGOOOO',
-                 kind: Complaint.kinds[:burn])

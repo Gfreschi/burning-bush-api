@@ -298,6 +298,7 @@ Doorkeeper.configure do
   #
   # You can completely disable this feature with:
   #
+  # allow_blank_redirect_uri blank redirect URL (user won’t get redirected after login, as we are using API).
   allow_blank_redirect_uri true
   #
   # Or you can define your custom check:
