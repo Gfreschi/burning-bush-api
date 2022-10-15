@@ -13,12 +13,20 @@ Doorkeeper.configure do
   #   #   User.find_by(id: session[:user_id]) || redirect_to(new_user_session_url)
   # end
 
+  # add your supported grant types and other extensions
+  grant_flows %w[assertion authorization_code implicit password client_credentials]
+
   resource_owner_from_credentials do
     User.authenticate(params[:email], params[:password])
   end
 
-  # enable password grant
-  grant_flows %w[password]
+  resource_owner_from_assertion do
+    provider = params[:provider]
+    if provider == 'google'
+      google = Authentication::ExternalAuthGoogle.new(params[:assertion])
+      google.get_user!
+    end
+  end
 
   # If you didn't skip applications controller from Doorkeeper routes in your application routes.rb
   # file then you need to declare this block in order to restrict access to the web interface for

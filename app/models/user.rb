@@ -36,4 +36,8 @@ class User < ApplicationRecord
       user.skip_confirmation!
     end
   end
+
+  def self.authorize_from_external(params)
+    puts params
+  end
 end

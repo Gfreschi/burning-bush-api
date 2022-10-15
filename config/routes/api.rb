@@ -5,6 +5,13 @@ namespace :api do
     scope :users, module: :users do
       post '/', to: 'registrations#create', as: :user_registration
     end
+
+    devise_for :users, controllers: {
+      confirmations: 'api/v1/users/confirmations',
+      passwords: 'api/v1/users/passwords',
+      omniauth_callbacks: 'api/v1/users/omniauth_callbacks'
+    }, skip: %i[registrations sessions]
+
     resources :complaints
 
     namespace :mobile do

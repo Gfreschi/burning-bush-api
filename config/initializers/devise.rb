@@ -10,9 +10,9 @@
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
   # added for error in flash message
-  config.navigational_formats = []
+  config.navigational_formats = [:json]
 
-  config.navigational_formats = ['*/*', :html, :turbo_stream]
+  # config.navigational_formats = ['*/*', :html, :turbo_stream]
 
   # Ominiauth config
   config.omniauth :google_oauth2,

@@ -15,12 +15,11 @@ module Api
           user = User.from_omniauth(auth)
 
           if user.present?
-            sign_out_all_scopes
-            flash[:notice] = I18n.t('devise.omniauth_callbacks.success', kind: 'Google')
-            sign_in user, event: :authentication
+            render json: { user: user }, status: :ok
+            # flash[:notice] = I18n.t('devise.omniauth_callbacks.success', kind: 'Google')
           else
-            flash[:alert] = I18n.t('devise.omniauth_callbacks.failure', kind: 'Google', reason: "#{auth.info.email} is not authorized.")
-            redirect_to new_user_session_path
+            render json: { error: I18n.t('devise.omniauth_callbacks.failure', kind: 'Google', reason: 'User not found') }
+            # flash[:alert] = I18n.t('devise.omniauth_callbacks.failure', kind: 'Google', reason: "#{auth.info.email} is not authorized.")
           end
         end
 
