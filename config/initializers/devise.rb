@@ -14,6 +14,11 @@ Devise.setup do |config|
 
   config.navigational_formats = ['*/*', :html, :turbo_stream]
 
+  # Ominiauth config
+  config.omniauth :google_oauth2,
+                  Rails.application.credentials[:GOOGLE_OAUTH_CLIENT_ID],
+                  Rails.application.credentials[:GOOGLE_OAUTH_CLIENT_SECRET]
+
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.

@@ -32,4 +32,3 @@ User.create(name: 'Fulano',
             password: 'password',
             password_confirmation: 'password',
             role: User.roles[:user])
-

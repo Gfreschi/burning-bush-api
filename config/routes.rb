@@ -13,8 +13,9 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: {
     confirmations: 'api/v1/users/confirmations',
-    passwords: 'api/v1/users/passwords'
-  }, skip: %i[registrations sessions omniauth_callbacks]
+    passwords: 'api/v1/users/passwords',
+    omniauth_callbacks: 'api/v1/users/omniauth_callbacks'
+  }, skip: %i[registrations sessions]
 
   draw :api
 

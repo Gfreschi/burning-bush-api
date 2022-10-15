@@ -100,6 +100,12 @@ end
 
 gem 'devise', '~> 4.8'
 
+gem 'omniauth'
+
+gem 'omniauth-google-oauth2'
+
+gem 'omniauth-rails_csrf_protection', '~> 1.0'
+
 gem 'doorkeeper', '~> 5.5'
 
 gem 'geocoder', '~> 1.8'
