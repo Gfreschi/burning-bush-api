@@ -18,7 +18,7 @@ Doorkeeper.configure do
   # add your supported grant types and other extensions
   grant_flows %w[assertion authorization_code implicit password client_credentials]
 
-  # grant type password
+  # grant type password for login
   resource_owner_from_credentials do
     User.authenticate(params[:email], params[:password])
   end
