@@ -16,7 +16,7 @@ Doorkeeper.configure do
   # end
 
   # add your supported grant types and other extensions
-  grant_flows %w[assertion authorization_code implicit password client_credentials]
+  grant_flows %w[assertion authorization_code implicit password client_credentials refresh_token]
 
   # grant type password for login
   resource_owner_from_credentials do
@@ -250,6 +250,7 @@ Doorkeeper.configure do
   # `grant_type` - the grant type of the request (see Doorkeeper::OAuth)
   # `scopes` - the requested scopes (see Doorkeeper::OAuth::Scopes)
   #
+  
   use_refresh_token
 
   # Provide support for an owner to be assigned to each registered application (disabled by default)

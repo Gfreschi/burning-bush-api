@@ -27,7 +27,7 @@ module DoorkeeperRegisterable
       token_type:,
       expires_in: access_token.expires_in,
       use_refresh_token: access_token.refresh_token,
-      create_at: user.created_at.iso8601
+      created_at: user.created_at.iso8601
     }
   end
 end

@@ -9,8 +9,8 @@
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
-  # added for error in flash message
-  config.navigational_formats = [:json]
+  # never change this because its api only
+  config.navigational_formats = []
 
   # config.navigational_formats = ['*/*', :html, :turbo_stream]
 
@@ -37,10 +37,10 @@ Devise.setup do |config|
   config.mailer_sender = 'email_confirmation@bnb.com'
 
   # Configure the class responsible to send e-mails.
-  # config.mailer = 'Devise::Mailer'
+  config.mailer = 'Devise::Mailer'
 
   # Configure the parent class responsible to send e-mails.
-  # config.parent_mailer = 'ActionMailer::Base'
+  config.parent_mailer = 'ActionMailer::Base'
 
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
