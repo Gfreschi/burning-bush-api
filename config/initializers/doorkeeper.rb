@@ -5,6 +5,8 @@ Doorkeeper.configure do
   # Check the list of supported ORMs here: https://github.com/doorkeeper-gem/doorkeeper#orms
   orm :active_record
 
+  api_only
+
   # This block will be called to check whether the resource owner is authenticated or not.
   # resource_owner_authenticator do
   #   raise "Please configure doorkeeper resource_owner_authenticator block located in #{__FILE__}"
@@ -16,15 +18,31 @@ Doorkeeper.configure do
   # add your supported grant types and other extensions
   grant_flows %w[assertion authorization_code implicit password client_credentials]
 
+  # grant type password
   resource_owner_from_credentials do
     User.authenticate(params[:email], params[:password])
   end
 
+  # resource_owner_from_assertion to fetch the user from the assertion in other providers
   resource_owner_from_assertion do
-    provider = params[:provider]
-    if provider == 'google'
-      google = Authentication::ExternalAuthGoogle.new(params[:assertion])
-      google.get_user!
+    if params[:provider] && params[:assertion]
+      # binding.break
+      auth = begin
+        Doorkeeper::GrantsAssertion::OmniAuth.oauth2_wrapper(
+          provider: 'google_oauth2',
+          strategy_class: OmniAuth::Strategies::GoogleOauth2,
+          client_id: Rails.application.credentials[:GOOGLE_OAUTH_CLIENT_ID],
+          client_secret: Rails.application.credentials[:GOOGLE_OAUTH_CLIENT_SECRET],
+          client_options: { skip_image_info: false },
+          assertion: params.fetch(:assertion)
+        ).auth_hash
+      rescue StandardError
+        nil
+      end
+
+      return unless auth.nil?
+      # your custom finders - just like in devise omniauth
+      # User.find_by(google_id: auth['id'])
     end
   end
 
