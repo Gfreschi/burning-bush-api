@@ -28,6 +28,8 @@ Doorkeeper.configure do
     if params[:provider] && params[:assertion]
       # binding.break
       auth = begin
+        # TODO: implement the logic to fetch the user from the assertion that come back from the provider
+        # today this process does not work properly
         Doorkeeper::GrantsAssertion::OmniAuth.oauth2_wrapper(
           provider: 'google_oauth2',
           strategy_class: OmniAuth::Strategies::GoogleOauth2,
