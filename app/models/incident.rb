@@ -10,5 +10,11 @@ class Incident < ApplicationRecord
 
   delegate :coordinates, to: :location
   delegate :latitude, :longitude, to: :location
-  delegate :address, to: :location
+  delegate :full_address, to: :location
+
+  scope :near_incidents, lambda { |latitude, longitude, distance_in_kilometers = 2|
+    joins(:location)
+      .merge(Location.near_coordinates(latitude, longitude, distance_in_kilometers))
+      .select('incidents.*, locations.latitude, locations.longitude')
+  }
 end

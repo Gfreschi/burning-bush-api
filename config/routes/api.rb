@@ -6,22 +6,13 @@ namespace :api do
       post '/', to: 'registrations#create', as: :user_registration
     end
 
-    devise_for :users, controllers: {
-      confirmations: 'api/v1/users/confirmations',
-      passwords: 'api/v1/users/passwords'
-      #omniauth_callbacks: 'api/v1/users/omniauth_callbacks'
-    }, skip: %i[registrations sessions omniauth_callbacks]
-
     resources :complaints
-
-    namespace :mobile do
-      resources :complaints
-    end
 
     namespace :web do
       resources :complaints
       get 'latest', to: 'complaints#latest'
       resources :incidents
+      post 'near_by', to: 'incidents#near_by'
     end
 
     get '/users/me', to: 'users#me'
@@ -30,6 +21,7 @@ end
 
 scope :api do
   scope :v1 do
+    # TODO: verify if this is the best way to do this
     use_doorkeeper do
       skip_controllers :authorizations, :applications, :authorized_applications
     end

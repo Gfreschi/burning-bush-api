@@ -30,6 +30,10 @@ class Location < ApplicationRecord
     obj.full_address.present? && obj.full_address_changed?
   }
 
+  scope :near_coordinates, lambda { |latitude, longitude, distance_in_kilometers = 2|
+    geocoded.near([latitude, longitude], distance_in_kilometers, units: :km)
+  }
+
   private
 
   def build_full_address
