@@ -3,7 +3,7 @@
 module Api
   module V1
     class UsersController < ApiController
-      skip_before_action :doorkeeper_authorize!
+      # skip_before_action :doorkeeper_authorize!
       before_action :current_user
       respond_to    :json
       # before_action :set_user, only: %i[show edit update destroy]

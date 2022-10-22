@@ -9,17 +9,12 @@ Rails.application.routes.draw do
     skip_controllers :authorizations, :applications, :authorized_applications
   end
 
-  # devise_for :users
-
+  # https://github.com/heartcombo/devise/issues/3663
   devise_for :users, controllers: {
     confirmations: 'api/v1/users/confirmations',
     passwords: 'api/v1/users/passwords'
+    # omniauth_callbacks: 'api/v1/users/omniauth_callbacks'
   }, skip: %i[registrations sessions omniauth_callbacks]
 
   draw :api
-
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
 end

@@ -6,23 +6,19 @@ class IncidentGenerator
     @complaint = complaint
   end
 
-  def call
-    ActiveRecord::Base.transaction do
-      generate_incident
-    end
-  end
-
   def self.call(complaint)
-    new(complaint).call
+    new(complaint).send(:generate)
   end
 
   private
 
   attr_accessor :complaint
 
-  def should_create_incident?
-    true
-    # complaint.incident.nil?
+  def generate
+    ActiveRecord::Base.transaction do
+      generate_incident
+      update_complaint
+    end
   end
 
   def build_attributes

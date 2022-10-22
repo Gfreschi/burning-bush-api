@@ -6,6 +6,7 @@ class CreateLocations < ActiveRecord::Migration[7.0]
       t.string :state
       t.string :city
       t.string :street
+      t.string :full_address
       t.float :latitude
       t.float :longitude
 

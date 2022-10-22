@@ -19,6 +19,11 @@ module Api
           render json: @incident
         end
 
+        def near_by
+          @incidents_near_by = Incident.near_incidents(params[:latitude], params[:longitude])
+          render json: @incidents_near_by
+        end
+
         private
 
         # Use callbacks to share common setup or constraints between actions.
@@ -29,6 +34,10 @@ module Api
         # Only allow a list of trusted parameters through.
         def incident_params
           params.require(:incident)
+        end
+
+        def near_by_params
+          params.permit(:latitude, :longitude)
         end
       end
     end

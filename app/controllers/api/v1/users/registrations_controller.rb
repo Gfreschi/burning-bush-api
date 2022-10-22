@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Responsible for handling user registration through Doorkeeper
 module Api
   module V1
     module Users

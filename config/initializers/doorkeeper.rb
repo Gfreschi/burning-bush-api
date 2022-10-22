@@ -5,6 +5,8 @@ Doorkeeper.configure do
   # Check the list of supported ORMs here: https://github.com/doorkeeper-gem/doorkeeper#orms
   orm :active_record
 
+  api_only
+
   # This block will be called to check whether the resource owner is authenticated or not.
   # resource_owner_authenticator do
   #   raise "Please configure doorkeeper resource_owner_authenticator block located in #{__FILE__}"
@@ -13,12 +15,38 @@ Doorkeeper.configure do
   #   #   User.find_by(id: session[:user_id]) || redirect_to(new_user_session_url)
   # end
 
+  # add your supported grant types and other extensions
+  grant_flows %w[assertion authorization_code implicit password client_credentials refresh_token]
+
+  # grant type password for login
   resource_owner_from_credentials do
     User.authenticate(params[:email], params[:password])
   end
 
-  # enable password grant
-  grant_flows %w[password]
+  # resource_owner_from_assertion to fetch the user from the assertion in other providers
+  resource_owner_from_assertion do
+    if params[:provider] && params[:assertion]
+      # binding.break
+      auth = begin
+        # TODO: implement the logic to fetch the user from the assertion that come back from the provider
+        # today this process does not work properly
+        Doorkeeper::GrantsAssertion::OmniAuth.oauth2_wrapper(
+          provider: 'google_oauth2',
+          strategy_class: OmniAuth::Strategies::GoogleOauth2,
+          client_id: Rails.application.credentials[:GOOGLE_OAUTH_CLIENT_ID],
+          client_secret: Rails.application.credentials[:GOOGLE_OAUTH_CLIENT_SECRET],
+          client_options: { skip_image_info: false },
+          assertion: params.fetch(:assertion)
+        ).auth_hash
+      rescue StandardError
+        nil
+      end
+
+      return unless auth.nil?
+      # your custom finders - just like in devise omniauth
+      # User.find_by(google_id: auth['id'])
+    end
+  end
 
   # If you didn't skip applications controller from Doorkeeper routes in your application routes.rb
   # file then you need to declare this block in order to restrict access to the web interface for
@@ -222,6 +250,7 @@ Doorkeeper.configure do
   # `grant_type` - the grant type of the request (see Doorkeeper::OAuth)
   # `scopes` - the requested scopes (see Doorkeeper::OAuth::Scopes)
   #
+  
   use_refresh_token
 
   # Provide support for an owner to be assigned to each registered application (disabled by default)
