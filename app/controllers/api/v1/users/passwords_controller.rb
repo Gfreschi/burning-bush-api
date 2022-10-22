@@ -7,14 +7,20 @@ module Api
         # skip because we don't need to authenticate the user if they are registering
         skip_before_action :doorkeeper_authorize!
 
+        prepend_before_action :require_no_authentication
+
+        # Render the #edit only if coming from a reset password email link
+        append_before_action :assert_reset_token_passed, only: :edit
+
         # GET /resource/password/new
         def new
-          super
+          self.resource = resource_class.new
         end
 
         # POST /resource/password
         def create
-          self.resource = resource_class.send_reset_password_instructions(user_params)
+          # binding.break
+          self.resource = resource_class.send_reset_password_instructions(resource_params)
           yield resource if block_given?
 
           if successfully_sent?(resource)
@@ -35,7 +41,7 @@ module Api
         def update
           self.resource = resource_class.reset_password_by_token(resource_params)
           yield resource if block_given?
-      
+
           if resource.errors.empty?
             resource.unlock_access! if unlockable?(resource)
             if Devise.sign_in_after_reset_password
@@ -70,18 +76,6 @@ module Api
             set_flash_message(:alert, :no_token)
             redirect_to new_session_path(resource_name)
           end
-        end
-
-        # Check if proper Lockable module methods are present & unlock strategy
-        # allows to unlock resource on password reset
-        def unlockable?(resource)
-          resource.respond_to?(:unlock_access!) &&
-            resource.respond_to?(:unlock_strategy_enabled?) &&
-            resource.unlock_strategy_enabled?(:email)
-        end
-
-        def user_params
-          params.require(:user).permit(:email)
         end
       end
     end

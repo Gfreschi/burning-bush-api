@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     skip_controllers :authorizations, :applications, :authorized_applications
   end
 
+  # https://github.com/heartcombo/devise/issues/3663
   devise_for :users, controllers: {
     confirmations: 'api/v1/users/confirmations',
     passwords: 'api/v1/users/passwords'
