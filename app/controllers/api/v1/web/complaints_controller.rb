@@ -8,7 +8,7 @@ module Api
 
         before_action :set_complaint, only: %i[show update destroy]
 
-        skip_before_action :doorkeeper_authorize!
+        # skip_before_action :doorkeeper_authorize!
 
         def index
           @complaints = Complaint.where(user_id: current_user).all.order('created_at DESC')
