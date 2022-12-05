@@ -2,7 +2,11 @@
 
 class ComplaintSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
-  attributes :id, :severity, :details, :image, :user
+  attributes :id, :severity, :details, :latitude, :longitude, :kind, :associated_incident, :image, :created_at
+
+  def associated_incident
+    object&.incident&.present?
+  end
 
   def image
     return unless object.image.attached?

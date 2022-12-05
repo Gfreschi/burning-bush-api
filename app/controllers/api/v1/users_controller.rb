@@ -74,6 +74,7 @@ module Api
             id: @current_user.id,
             email: @current_user.email,
             role: @current_user.role,
+            avatar: @current_user.avatar,
             created_at: @current_user.created_at.iso8601
           }, status: :ok
         end

@@ -20,8 +20,14 @@ module Api
         end
 
         def near_by
-          @incidents_near_by = Incident.near_incidents(params[:latitude], params[:longitude])
-          render json: @incidents_near_by
+          valid_params = near_by_params
+
+          if valid_params[:latitude].present? && valid_params[:longitude].present?
+            @incidents_near_by = Incident.near_incidents(params[:latitude], params[:longitude])
+            render json: @incidents_near_by
+          else
+            render json: { message: 'Invalid params' }, status: :unprocessable_entity
+          end
         end
 
         private

@@ -25,36 +25,41 @@ class ComplaintAnalyser
 
   def build_complaint_array
     [
-      complaint.details.length,
-      complaint.kind = 'Fire',
-      complaint.image.attached? ? 1 : 0
+      complaint.details.to_s.length,
+      complaint.kind.present? ? 1 : 0,
+      complaint.image.attached? ? 1 : 0,
+      complaint.user.confirmed? ? 1 : 0
     ]
   end
 
   def build_tree_and_train
-    attributes = ['details_lengh', 'kind', 'img_attached?']
+    attributes = ['DETAILS_LENGTH', 'KIND?', 'IMAGE?', 'USER_CONFIRMED?']
 
     training = [
-      [5, 'Fire', 1, 1],
-      [6, 'Fire', 0, 1],
-      [7, 'Fire', 0, 1],
-      [100, 'Fire', 0, 1],
-      [100, 'Fire', 1, 1],
-      [10, 'Fire', 1, 1],
-      [10, 'Fire', 0, 1],
-      [0, 'Fire', 1, 1],
-      [34, 'Flood', 0, 1],
-      [2, 'Flood', 1, 1],
-      [100, 'Flood', 1, 1],
-      [100, 'Flood', 0, 1],
-      [0, 'Flood', 0, 0],
-      [0, 'Flood', 1, 1],
-      [1, 'Flood', 1, 0],
-      [0, '', 1, 0],
-      [0, '', 0, 0],
-      [100, '', 1, 0],
-      [100, '', 0, 0]
-      # ... more training examples
+      [5, 1, 1, 1, 1],
+      [6, 1, 0, 1, 1],
+      [7, 1, 0, 0, 0],
+      [100, 1, 0, 0, 1],
+      [30, 1, 0, 0, 1],
+      [100, 1, 1, 0, 1],
+      [30, 1, 0, 1, 1],
+      [10, 1, 0, 0, 0],
+      [10, 1, 0, 1, 1],
+      [0, 1, 1, 1, 1],
+      [0, 1, 1, 0, 0],
+      [0, 1, 0, 1, 1],
+      [2, 1, 1, 1, 1],
+      [2, 1, 0, 0, 0],
+      [5, 1, 0, 0, 0],
+      [8, 1, 0, 0, 0],
+      [0, 1, 1, 1, 1],
+      [0, 1, 1, 0, 1],
+      [0, 0, 0, 0, 0],
+      [0, 0, 0, 1, 0],
+      [0, 0, 1, 0, 0],
+      [0, 1, 0, 0, 0],
+      [0, 0, 1, 1, 0],
+      [0, 1, 0, 1, 0]
     ]
 
     # Instantiate the tree, and train it based on the data (set default to 1)

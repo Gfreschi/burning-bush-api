@@ -12,7 +12,7 @@ namespace :api do
       resources :complaints
       get 'latest', to: 'complaints#latest'
       resources :incidents
-      post 'near_by', to: 'incidents#near_by'
+      get 'near_by', to: 'incidents#near_by'
     end
 
     get '/users/me', to: 'users#me'
