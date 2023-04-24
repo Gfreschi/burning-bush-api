@@ -112,6 +112,6 @@ gem 'doorkeeper-grants_assertion'
 
 gem 'geocoder', '~> 1.8'
 
-gem 'sidekiq', '~> 6.5'
+gem 'sidekiq', '~> 7.0'
 
 gem 'decisiontree', '~> 0.5.0'
