@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.1.1'
+ruby '3.2.2'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.0.2', '>= 7.0.2.3'
@@ -72,9 +72,6 @@ group :development, :test do
   gem 'brakeman'
   gem 'bundler-audit'
   gem 'ruby_audit'
-
-  # Database related gems
-  gem 'pg'
 
   # Linting related gems
   gem 'rubocop', require: false
