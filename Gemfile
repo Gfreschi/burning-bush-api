@@ -103,7 +103,7 @@ gem 'omniauth-google-oauth2'
 
 gem 'omniauth-rails_csrf_protection', '~> 1.0'
 
-gem 'doorkeeper', '~> 5.5'
+gem 'doorkeeper', '~> 5.6'
 
 gem 'doorkeeper-grants_assertion'
 
