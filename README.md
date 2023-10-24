@@ -1,24 +1,42 @@
-# README
+## Introduction
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The `burning-bush-api` was part of my Computer Engineering graduation project. It is a Ruby on Rails API that serves the [burning-bush-web](https://github.com/Gfreschi/burning-bush-web) Next.js application. The API is responsible for handling user authentication and authorization, as well as storing and retrieving data from the database, necessary for the application to function. Its also possible to perform data analysis and classification using a Decision Tree algorithm.
 
-Things you may want to cover:
+The API is not finished and is not deployed.
 
-* Ruby version
+## Key Features
 
-* System dependencies
+- Authentication and authorization (Devise and Doorkeeper)
+- Data analysis and classification (Desision Tree) (not finished)
+- Geolocation (Geocoder)
+- General CRUD operations
 
-* Configuration
+## Technologies and gems used
 
-* Database creation
+- Ruby on Rails
+- SQLite
+- Sidekiq
+- Redis
+- Devise
+- Doorkeeper
+- Geocoder
+- Decision Tree
+- RSpec
 
-* Database initialization
+## Getting Started
 
-* How to run the test suite
+First, bundle and install dependencies:
 
-* Services (job queues, cache servers, search engines, etc.)
+```bash
+bundle
+```
 
-* Deployment instructions
+Then, run the development server:
 
-* ...
+```bash
+rails s
+
+```
+
+### License
+This project is licensed under the [MIT LICENSE]. For more details, please see the LICENSE file.

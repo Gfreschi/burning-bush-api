@@ -2,6 +2,7 @@
 
 require 'decisiontree'
 
+# WIP
 # This service analyse a complaint and create a new incident if necessary
 # discrete values are values that you know the possible values of
 # in this case, we know the possible values of the 'img_attached?' and 'kind' attributes
@@ -38,28 +39,9 @@ class ComplaintAnalyser
     training = [
       [5, 1, 1, 1, 1],
       [6, 1, 0, 1, 1],
-      [7, 1, 0, 0, 0],
-      [100, 1, 0, 0, 1],
-      [30, 1, 0, 0, 1],
-      [100, 1, 1, 0, 1],
-      [30, 1, 0, 1, 1],
-      [10, 1, 0, 0, 0],
-      [10, 1, 0, 1, 1],
-      [0, 1, 1, 1, 1],
-      [0, 1, 1, 0, 0],
-      [0, 1, 0, 1, 1],
-      [2, 1, 1, 1, 1],
-      [2, 1, 0, 0, 0],
-      [5, 1, 0, 0, 0],
-      [8, 1, 0, 0, 0],
-      [0, 1, 1, 1, 1],
-      [0, 1, 1, 0, 1],
-      [0, 0, 0, 0, 0],
-      [0, 0, 0, 1, 0],
-      [0, 0, 1, 0, 0],
-      [0, 1, 0, 0, 0],
-      [0, 0, 1, 1, 0],
-      [0, 1, 0, 1, 0]
+      [0, 1, 0, 1, 0],
+      [0, 0, 1, 1, 0]
+      # more cases
     ]
 
     # Instantiate the tree, and train it based on the data (set default to 1)
